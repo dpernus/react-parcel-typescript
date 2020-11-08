@@ -1,8 +1,28 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 import { Users } from './components/Users/Users'
+import { Resumee } from './components/Resumee/Resumee'
+import { Error } from './components/Error'
+
 import './assets/index.scss'
 
-const Application: React.FunctionComponent = () => <Users />
+const Application: React.FunctionComponent = () => {
+  return (
+    <main>
+      <Switch>
+        <Route path="/" component={Users} exact />
+        <Route path="/user/:id" component={Resumee} />
+        <Route component={Error} />
+      </Switch>
+    </main>
+  )
+}
 
-render(<Application />, document.getElementById('root'))
+render(
+  <BrowserRouter>
+    <Application />
+  </BrowserRouter>,
+  document.getElementById('root'),
+)

@@ -29,5 +29,5 @@ module.exports = {
   settings: {
     react: { version: 'detect' },
   },
-  rules: {},
+  rules: {"comma-dangle": ["error", "always-multiline"]},
 }
