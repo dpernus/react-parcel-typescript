@@ -2,18 +2,12 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Header } from './Header'
+import { PersonalInfo, PersonalData } from './PersonalInfo'
 import { Error } from './../Error'
 
 import './resumee.scss'
+import { Skills, SkillsView } from './SkillsView'
 
-export interface PersonalData {
-  name: string
-  age: number
-  email: string
-  address?: string
-  phone?: number
-  social?: string
-}
 export interface Institution {
   name: string
   description: string
@@ -33,8 +27,6 @@ export interface Course {
   institution: Institution
   description?: string[]
 }
-
-export type Skills = Record<string, string[]>
 
 export interface ResumeeInfo {
   personalData: PersonalData
@@ -56,35 +48,85 @@ const resumee: ResumeeInfo = {
   keyTerms: ['desarrollo de software', 'fullstack'],
   workExperience: [],
   education: [],
-  skills: {},
+  skills: {
+    "programming_language": [
+      "JavaScript",
+      "TypeScript",
+      "C++",
+      "Go",
+      "Java",
+      "SQL",
+      "T-SQL",
+      "HTML",
+      "CSS",
+      "Python",
+      "PHP"
+    ],
+    "software_desing": [
+      "POO",
+      "Patrones de diseño",
+      "Arquitecturas Limpias",
+      "Microservicios",
+      "Diseño Responsive",
+      "REST",
+      "DDD",
+      "UML"
+    ],
+    "development_frameworks": [
+      "NodeJS",
+      "Express",
+      "Koa",
+      "Restify",
+      "ReactJS",
+      "Redux",
+      "VueJS",
+      "Jest",
+      "Bootstrap",
+      "Yii",
+      "ExtJs4"
+    ],
+    "platforms_tools": [
+      "Docker",
+      "Docker Swarm",
+      "Azure Cloud",
+      "Drone CI",
+      "Instana",
+      "Kibana"
+    ],
+    "databases": [
+      "SQL Server",
+      "PostgresSQL",
+      "MongoDB",
+      "MySQL"
+    ],
+    "software_dev_mngmnt": [
+      "Scrum",
+      "Kanban",
+      "RUP"
+    ],
+    "operating_systems": [
+      "MacOS, Windows (XP, 7, 8, 10)",
+      "Windows Server (2008, 2012)",
+      "Linux (Proxmox VE)"
+    ],
+    "idioms": [
+      "Español (nativo)",
+      "Inglés (pre-intermedio)"
+    ]
+  },
 }
 
 export const Resumee: React.FunctionComponent = () => {
   // const { id } = useParams<{ id: string }>()
-  const { name, age, email, phone, address, social } = resumee.personalData
+  const { name } = resumee.personalData
+
   return resumee ? (
     <section className="container">
       <Header name={name} keyTerms={resumee.keyTerms} />
       <div className="wrapper">
         <aside id="side-content">
-          <div className="basic-info">
-            <div className="logo"></div>
-            <div id="age" className="item"><i className="fa fa-user"></i><span>{age}</span></div>
-            {address && <div id="address" className="item"><i className="fa fa-map-marker"></i><span></span></div>}
-            {phone && <div id="phone" className="item"><i className="fa fa-phone"></i><span></span></div>}
-            <div id="email" className="item"><i className="fa fa-envelope"></i><span>{email}</span></div>
-            {social && <div id="linkedin" className="item"><i className="fa fa-linkedin"></i><span></span></div>}
-          </div>
-          <div className="skills">
-            <h2>HABILIDADES</h2>
-            <div className="softw-dsng"></div>
-            <div className="data-bases"></div>
-            <div className="program-lang"></div>
-            <div className="softw-dv-mng"></div>
-            <div className="dev-frmwrk"></div>
-            <div className="opertv-syst"></div>
-            <div className="langs"></div>
-          </div>
+          <PersonalInfo personalData={resumee.personalData} />
+          <SkillsView skills={resumee.skills} />
         </aside>
         <section id="main-content">
           <div className="summary">
