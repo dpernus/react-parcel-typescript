@@ -4,7 +4,7 @@ import './styles.scss'
 
 const users = [
   {
-    id: 2,
+    id: 45,
     name: 'Diana Lourdes Pernus Alonso',
     keyTerms: ['"desarrollo de software", "fullstack"'],
     avatar: 'https://robohash.org/2b93eec77aeb5e2808f2c94edc97fd7e?set=set4&bgset=&size=300x300',

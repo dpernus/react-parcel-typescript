@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Header } from './Header'
 import { PersonalInfo, PersonalData } from './PersonalInfo'
-import { Error } from './../Error'
+import { Loading } from './../Loading'
+import { Error as ErrorView } from './../Error'
 
 import './resumee.scss'
 import { Skills, SkillsView } from './SkillsView'
@@ -37,92 +38,33 @@ export interface ResumeeInfo {
   skills: Skills
 }
 
-const resumee: ResumeeInfo = {
-  personalData: {
-    age: 31,
-    name: 'Diana Lourdes Pernús Alonso',
-    email: 'dpernus@gmail.com',
-  },
-  summary:
-    'Ingeniera Informática con 8 años de experiencia en la industria de desarrollo de software. Apasionada por la búsqueda de la excelencia y el trabajo colaborativo. Posee buenas habilidades comunicativas y capacidad para rápido aprendizaje y autopreparación. Con 3 años de experiencia desarrollando productos mediante metodologías ágiles en empresas con procesos de transformación digital. Con 5 años de experiencia en: despliegue, soporte y prueba de aplicaciones, manejo de bases de datos e implementación de scripts. Conoce las diferentes áreas del desarrollo de aplicaciones y tiene habilidades para trabajar como desarrolladora tanto en backend como frontend.',
-  keyTerms: ['desarrollo de software', 'fullstack'],
-  workExperience: [],
-  education: [],
-  skills: {
-    "programming_language": [
-      "JavaScript",
-      "TypeScript",
-      "C++",
-      "Go",
-      "Java",
-      "SQL",
-      "T-SQL",
-      "HTML",
-      "CSS",
-      "Python",
-      "PHP"
-    ],
-    "software_desing": [
-      "POO",
-      "Patrones de diseño",
-      "Arquitecturas Limpias",
-      "Microservicios",
-      "Diseño Responsive",
-      "REST",
-      "DDD",
-      "UML"
-    ],
-    "development_frameworks": [
-      "NodeJS",
-      "Express",
-      "Koa",
-      "Restify",
-      "ReactJS",
-      "Redux",
-      "VueJS",
-      "Jest",
-      "Bootstrap",
-      "Yii",
-      "ExtJs4"
-    ],
-    "platforms_tools": [
-      "Docker",
-      "Docker Swarm",
-      "Azure Cloud",
-      "Drone CI",
-      "Instana",
-      "Kibana"
-    ],
-    "databases": [
-      "SQL Server",
-      "PostgresSQL",
-      "MongoDB",
-      "MySQL"
-    ],
-    "software_dev_mngmnt": [
-      "Scrum",
-      "Kanban",
-      "RUP"
-    ],
-    "operating_systems": [
-      "MacOS, Windows (XP, 7, 8, 10)",
-      "Windows Server (2008, 2012)",
-      "Linux (Proxmox VE)"
-    ],
-    "idioms": [
-      "Español (nativo)",
-      "Inglés (pre-intermedio)"
-    ]
-  },
-}
-
 export const Resumee: React.FunctionComponent = () => {
-  // const { id } = useParams<{ id: string }>()
-  const { name } = resumee.personalData
+  const { id } = useParams<{ id: string }>()
+  const [resumee, setResumee] = useState<ResumeeInfo | undefined>(undefined)
+  const [error, setError] = useState<Error | undefined>(undefined)
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/user/${id}`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Server error')
+        }
+        return res.json()
+      })
+      .then(resumeeData => setResumee(resumeeData))
+      .catch(error => {
+        console.error(error)
+        setError(error)
+      })
+  }, [])
+
+  if (error) {
+    return <ErrorView />
+  }
 
   return resumee ? (
     <section className="container">
-      <Header name={name} keyTerms={resumee.keyTerms} />
+      <Header name={resumee.personalData.name} keyTerms={resumee.keyTerms} />
       <div className="wrapper">
         <aside id="side-content">
           <PersonalInfo personalData={resumee.personalData} />
@@ -145,5 +87,5 @@ export const Resumee: React.FunctionComponent = () => {
         </section>
       </div>
     </section>
-  ) : (<Error />)
+  ) : (<Loading />)
 }

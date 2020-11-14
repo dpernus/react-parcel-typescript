@@ -19,7 +19,7 @@ const SkillCategory: React.FunctionComponent<{ skillName: string, skillValues: s
       <h3>{skillsCategories[skillName]}</h3>
       <ul>
         {skillValues.map(skill => (
-          <li>{skill}</li>
+          <li key={skill}>{skill}</li>
         ))}
       </ul>
     </div>
