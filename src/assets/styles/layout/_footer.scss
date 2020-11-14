@@ -1,0 +1,13 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+footer {
+    text-align: right;
+    padding-top: 15px;
+
+    p {
+        font-size: $small-font;
+        font-style: italic;
+        color: $secondary-text-color;
+    }
+}
