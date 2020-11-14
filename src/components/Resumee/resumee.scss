@@ -1,0 +1,48 @@
+@import "main";
+
+#side-content {
+    background-color: $brand-color;
+    @include flex(1 88px);
+    @include order(1);
+
+    padding: 0px;
+    padding-top: 139px;
+
+    color: $clear-text-color;
+
+    .logo {
+        background-image: url("../../../img/diana.jpg");
+        height: 150px;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .basic-info .item {
+        margin: 5px 0px;
+        i {
+            text-align: right;
+            margin-right: 10px;
+        }
+    }
+
+    .basic-info > div.item, .expertise, .skills, .hobbies {
+        margin-left: 10px;
+    }
+
+    div.skills h2 { margin-bottom: 5px; }
+    div.skills h3 {
+        margin-top: 3px;
+        font-size: 1.5rem;
+    }
+    .skills > div > ul {
+        list-style: none;
+        li {
+            display: inline-block;
+            padding: 2px 4px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin: 3px;
+            line-height: 13px;
+        }
+    }
+}
