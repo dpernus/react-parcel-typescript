@@ -29,5 +29,8 @@ module.exports = {
   settings: {
     react: { version: 'detect' },
   },
-  rules: {"comma-dangle": ["error", "always-multiline"]},
+  rules: {
+    "comma-dangle": ["error", "always-multiline"],
+    "react/ prop - types": disable
+  },
 }
