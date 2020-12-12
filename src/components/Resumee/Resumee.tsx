@@ -8,26 +8,8 @@ import { Error as ErrorView } from './../Error'
 
 import './resumee.scss'
 import { Skills, SkillsView } from './SkillsView'
-
-export interface Institution {
-  name: string
-  description: string
-  web?: string
-}
-
-export interface Job {
-  date: string
-  institution: Institution
-  charge: string
-  achivements: string[]
-}
-
-export interface Course {
-  date: string
-  title: string
-  institution: Institution
-  description?: string[]
-}
+import { Job, WorkExperience } from './WorkExperience'
+import { Course, Education } from './Education'
 
 export interface ResumeeInfo {
   personalData: PersonalData
@@ -77,10 +59,11 @@ export const Resumee: React.FunctionComponent = () => {
           </div>
           <div className="experience">
             <h2>EXPERIENCIA LABORAL</h2>
-            <h3>GET (Empresa de Servicios Informáticos Especializados, Cuba) <a href="http://www.get.tur.cu">www.get.tur.cu</a></h3>
+            <WorkExperience jobs={resumee.workExperience} />
           </div>
           <div className="education">
             <h2>EDUCACIÓN</h2>
+            <Education courses={resumee.education} />
           </div>
           <hr />
           <div className="hobbies"></div>
