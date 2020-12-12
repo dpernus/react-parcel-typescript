@@ -1,7 +1,7 @@
 #main-content {
     background-color: white;
-
     padding-top: 150px;
+    margin-left: 15px;
 
     @include flex(4 0px);
     @include order(2);

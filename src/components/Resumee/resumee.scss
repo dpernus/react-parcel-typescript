@@ -9,7 +9,9 @@
     padding-top: 139px;
 
     color: $clear-text-color;
-
+    display: flex;
+    flex-direction: column;
+    
     .picture {
         background-image: url("../../../img/diana.jpg");
         height: 150px;

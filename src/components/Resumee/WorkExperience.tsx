@@ -16,8 +16,8 @@ export interface Job {
 export const Achivements: FunctionComponent<{ achivements: string[] }> = ({ achivements }) => {
   return (
     <ul>
-      {achivements.map(achivement => (
-        <li>{achivement}</li>
+      {achivements.map((achivement, key) => (
+        <li key={`achivement-${key}`}>{achivement}</li>
       ))}
     </ul>
   )
@@ -25,20 +25,22 @@ export const Achivements: FunctionComponent<{ achivements: string[] }> = ({ achi
 
 export const WorkExperience: FunctionComponent<{ jobs: Job[] }> = ({ jobs }) => {
   return (
-    jobs.map(job => (
-      <div className="item wrapper">
-        <div className="date-field">
-          <p>{job.date}</p>
-        </div>
-        <div className="info-field">
-          <h3>{job.charge}</h3>
-          <h4 className="secondary-text-color">
-            {job.institution.name} ({job.institution.description})
-            <a href={`http://${job.institution.web}`} target="_blank"> {job.institution.web}</a>
-            <Achivements achivements={job.achivements} />
+    <>
+      {jobs.map((job, key) => (
+        <div className="item wrapper" key={`job-${key}`}>
+          <div className="date-field">
+            <p>{job.date}</p>
+          </div>
+          <div className="info-field">
+            <h3>{job.charge}</h3>
+            <h4 className="secondary-text-color">
+              {job.institution.name} ({job.institution.description})
           </h4>
-        </div>
-      </div >
-    ))
+            <p><a href={`http://${job.institution.web}`} target="_blank"> {job.institution.web}</a></p>
+            <Achivements achivements={job.achivements} />
+          </div>
+        </div >
+      ))}
+    </>
   )
 }
