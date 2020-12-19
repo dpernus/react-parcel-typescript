@@ -11,7 +11,7 @@
     color: $clear-text-color;
     display: flex;
     flex-direction: column;
-    
+
     .picture {
         background-image: url("../../../img/diana.jpg");
         height: 150px;
@@ -24,6 +24,9 @@
         i {
             text-align: right;
             margin-right: 10px;
+        }
+        a {
+          color: white
         }
     }
 
