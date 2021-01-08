@@ -1,28 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { ResumeeInfo } from '../Resumee/Resumee'
 import { User } from '../User'
+
+import { Loading } from './../Loading'
+import { Error as ErrorView } from './../Error'
+
 import './styles.scss'
 
-const users = [
-  {
-    id: 81,
-    name: 'Diana Lourdes Pernus Alonso',
-    keyTerms: ['"desarrollo de software", "fullstack"'],
-    avatar: 'https://robohash.org/2b93eec77aeb5e2808f2c94edc97fd7e?set=set4&bgset=&size=300x300',
-  },
-  {
-    id: 1,
-    name: 'Ernesto Fuentes Gomez',
-    keyTerms: ['"desarrollo de software", "fullstack"'],
-    avatar: 'https://gravatar.com/avatar/2b93eec77aeb5e2808f2c94edc97fd7e?s=300&d=robohash&r=x',
-  },
-]
-
 export const Users: React.FunctionComponent = () => {
-  return (
+  const [users, setUsers] = useState<ResumeeInfo[] | []>()
+  const [error, setError] = useState<Error | undefined>(undefined)
+
+  useEffect(() => {
+    fetch('http://localhost:3000/users')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Server error')
+        }
+        return res.json()
+      })
+      .then(resumeesList => setUsers(resumeesList))
+      .catch(error => {
+        console.error(error)
+        setError(error)
+      });
+  }, [])
+
+  if (error) {
+    return <ErrorView />
+  }
+
+  return users ? (
     <div className="users-list">
       {users.map((user, id) => (
         <User key={id} userInfo={user} />
       ))}
     </div>
-  )
+  ) : (<Loading />)
 }
