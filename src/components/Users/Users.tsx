@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Button } from 'antd'
 import { ResumeeInfo } from '../Resumee/Resumee'
 import { User } from '../User'
 
@@ -31,10 +33,17 @@ export const Users: React.FunctionComponent = () => {
   }
 
   return users ? (
-    <div className="users-list">
-      {users.map((user, id) => (
-        <User key={id} userInfo={user} />
-      ))}
-    </div>
+    <>
+      <div className="users-list">
+        {users.map((user, id) => (
+          <User key={id} userInfo={user} />
+        ))}
+      </div>
+      <div className="add-button">
+        <Link to='user/new'>
+          <Button type="primary" shape="round">Add Resumee</Button>
+        </Link>
+      </div>
+  </>
   ) : (<Loading />)
 }

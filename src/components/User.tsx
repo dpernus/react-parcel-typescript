@@ -1,6 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Card, Avatar } from 'antd'
+
 import { formatKeyTerms } from './Helpers/formatKeyTerms'
+
 interface UserInfo {
   id: number
   name: string
@@ -8,16 +10,26 @@ interface UserInfo {
   avatar: string
 }
 
-const defaultAvatar = 'https://gravatar.com/avatar/2b93eec77aeb5e2808f2c94edc97fd7e?s=300&d=robohash&r=x'
-
 export const User: React.FunctionComponent<{ userInfo: UserInfo }> = ({ userInfo }) => (
-  <div>
-    <Link to={`/user/${userInfo.id}`}>
-      <h2>{userInfo.name}</h2>
+  <div className="site-card-border-less-wrapper">
+    <Card title={userInfo.name} 
+      bordered={false}
+      extra={
+        <a href={`/user/${userInfo.id}`}>
+          More
+        </a>
+      } 
+      style={{ width: 300 }} 
+    >
       <h4>{formatKeyTerms(userInfo.keyTerms)}</h4>
-      <div>
-        <img src={userInfo.avatar ? `img/${userInfo.avatar}` : defaultAvatar} />
-      </div>
-    </Link>
+      {userInfo.avatar 
+        ? <img src={`img/${userInfo.avatar}`} />
+        :  <Avatar 
+              shape="square" 
+              size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+            >
+              USER
+            </ Avatar>}
+    </Card>
   </div>
 )

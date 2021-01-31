@@ -34,11 +34,19 @@
         margin-left: 10px;
     }
 
-    div.skills h2 { margin-bottom: 5px; }
-    div.skills h3 {
-        margin-top: 6px;
-        font-size: 1.4rem;
+    div.skills {
+        h2 { 
+            margin-bottom: 5px; 
+            margin-top: 20px;
+            color: white
+        }
+
+        h3 {
+            margin-top: 6px;
+            font-size: 1.4rem;
+        }
     }
+
     .skills > div > ul {
         list-style: none;
         li {
@@ -49,5 +57,11 @@
             margin: 3px;
             line-height: 13px;
         }
+    }
+}
+
+.container {
+    h1, h2 {
+        font-weight: 300;
     }
 }
